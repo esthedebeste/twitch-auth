@@ -1,6 +1,6 @@
 {
   "name": "@tbhmens/twitch-auth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An easy twitch openid connect interface.",
   "main": "./src/auth.js",
   "keywords": [

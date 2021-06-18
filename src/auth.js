@@ -118,7 +118,7 @@ class TwitchAuth {
      * 
      * @param {object} params - req.params
      * @param {object} statestore - Server-sided storage object on the user
-     * @returns {{aud: string, exp: number, iat: number, iss: string | "https://id.twitch.tv/oauth2", sub: number, azp: string, picture: string }} - Twitch User Object
+     * @returns {{aud: string, exp: number, iat: number, iss: string | "https://id.twitch.tv/oauth2", sub: number, azp: string, email: string, email_verified: boolean, picture: string, preferred_username: string, updated_at: string}} - Twitch User Object (If 'email_verified' is false then 'email' will be removed.)
      */
     verify(params, statestore) {
         const copy = { nonce: statestore.twitchAuthNonce, state: statestore.twitchAuthState };
