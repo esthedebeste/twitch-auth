@@ -116,20 +116,20 @@ class TwitchAuth {
 
     /**
      * 
-     * @param {object} params - req.params
+     * @param {object} query - req.query
      * @param {object} statestore - Server-sided storage object on the user
      * @returns {Promise<{aud: string, exp: number, iat: number, iss: string | "https://id.twitch.tv/oauth2", sub: number, azp: string, email: string|undefined, email_verified: boolean|undefined, picture: string|undefined, preferred_username: string|undefined, updated_at: string|undefined}>} - Twitch User Object (If 'email_verified' is false then 'email' will be removed.)
      */
-    verify(params, statestore) {
+    verify(query, statestore) {
         const copy = { nonce: statestore.twitchAuthNonce, state: statestore.twitchAuthState };
         delete statestore.twitchAuthNonce;
         delete statestore.twitchAuthState;
         return new Promise((resolve, reject) => {
-            if (params.state === copy.state && typeof params.state !== "undefined")
+            if (query.state === copy.state && typeof query.state !== "undefined")
                 axios.post(`token?${this.querify({
                     client_id: this.clientid,
                     client_secret: this.clientsecret,
-                    code: params.code,
+                    code: query.code,
                     grant_type: "authorization_code",
                     redirect_uri: this.redirect_uri
                 })}`).then(res => {
