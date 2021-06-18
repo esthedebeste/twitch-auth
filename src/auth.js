@@ -109,8 +109,8 @@ class TwitchAuth {
                         else
                             resolve(result);
                     });
-                })
-            })
+                });
+            });
         });
     }
 
@@ -118,7 +118,7 @@ class TwitchAuth {
      * 
      * @param {object} params - req.params
      * @param {object} statestore - Server-sided storage object on the user
-     * @returns {{aud: string, exp: number, iat: number, iss: string | "https://id.twitch.tv/oauth2", sub: number, azp: string, email: string, email_verified: boolean, picture: string, preferred_username: string, updated_at: string}} - Twitch User Object (If 'email_verified' is false then 'email' will be removed.)
+     * @returns {Promise<{aud: string, exp: number, iat: number, iss: string | "https://id.twitch.tv/oauth2", sub: number, azp: string, email: string|undefined, email_verified: boolean|undefined, picture: string|undefined, preferred_username: string|undefined, updated_at: string|undefined}>} - Twitch User Object (If 'email_verified' is false then 'email' will be removed.)
      */
     verify(params, statestore) {
         const copy = { nonce: statestore.twitchAuthNonce, state: statestore.twitchAuthState };
@@ -140,7 +140,7 @@ class TwitchAuth {
                             if (!result.email_verified)
                                 delete result.email;
                             resolve(result);
-                        })
+                        }).catch(err => reject(err));
                 }).catch(err => reject(err));
             else
                 reject(new AuthenticationError("Invalid State."));
