@@ -1,0 +1,27 @@
+{
+  "name": "@tbhmens/twitch-auth",
+  "version": "1.0.0",
+  "description": "An easy twitch openid connect interface.",
+  "main": "./src/auth.js",
+  "keywords": [
+    "twitch",
+    "api",
+    "openid",
+    "oidc",
+    "auth"
+  ],
+  "author": "tbhmens",
+  "license": "Unlicense",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tbhmens/twitch-auth.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tbhmens/twitch-auth/issues"
+  },
+  "homepage": "https://github.com/tbhmens/twitch-auth#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
